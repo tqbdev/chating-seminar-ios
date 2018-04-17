@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C30A1012085BF1200E0C0F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C30A1002085BF1200E0C0F7 /* GoogleService-Info.plist */; };
 		0CE6467F207BD3B4001E41D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE6467E207BD3B4001E41D2 /* AppDelegate.swift */; };
 		0CE64681207BD3B4001E41D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE64680207BD3B4001E41D2 /* ViewController.swift */; };
 		0CE64684207BD3B4001E41D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE64682207BD3B4001E41D2 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C30A1002085BF1200E0C0F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0CE6467B207BD3B4001E41D2 /* chating-seminar-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "chating-seminar-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CE6467E207BD3B4001E41D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CE64680207BD3B4001E41D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				0CE64685207BD3B4001E41D2 /* Assets.xcassets */,
 				0CE64687207BD3B4001E41D2 /* LaunchScreen.storyboard */,
 				0CE6468A207BD3B4001E41D2 /* Info.plist */,
+				0C30A1002085BF1200E0C0F7 /* GoogleService-Info.plist */,
 			);
 			path = "chating-seminar-ios";
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CE64689207BD3B4001E41D2 /* LaunchScreen.storyboard in Resources */,
+				0C30A1012085BF1200E0C0F7 /* GoogleService-Info.plist in Resources */,
 				0CE64686207BD3B4001E41D2 /* Assets.xcassets in Resources */,
 				0CE64684207BD3B4001E41D2 /* Main.storyboard in Resources */,
 			);
