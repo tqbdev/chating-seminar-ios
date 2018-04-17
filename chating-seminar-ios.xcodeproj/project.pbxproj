@@ -12,6 +12,7 @@
 		0CE64684207BD3B4001E41D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE64682207BD3B4001E41D2 /* Main.storyboard */; };
 		0CE64686207BD3B4001E41D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CE64685207BD3B4001E41D2 /* Assets.xcassets */; };
 		0CE64689207BD3B4001E41D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CE64687207BD3B4001E41D2 /* LaunchScreen.storyboard */; };
+		26FD297CD35CCE0111A37B3F /* Pods_chating_seminar_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEB7593F869DDE7DDBBED74 /* Pods_chating_seminar_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		0CE64685207BD3B4001E41D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CE64688207BD3B4001E41D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CE6468A207BD3B4001E41D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23340D40B8B02497A32E924E /* Pods-chating-seminar-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chating-seminar-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chating-seminar-ios/Pods-chating-seminar-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		84B1FF7452DAC794CB895060 /* Pods-chating-seminar-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chating-seminar-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-chating-seminar-ios/Pods-chating-seminar-ios.release.xcconfig"; sourceTree = "<group>"; };
+		DAEB7593F869DDE7DDBBED74 /* Pods_chating_seminar_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chating_seminar_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26FD297CD35CCE0111A37B3F /* Pods_chating_seminar_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				0CE6467D207BD3B4001E41D2 /* chating-seminar-ios */,
 				0CE6467C207BD3B4001E41D2 /* Products */,
+				621B8DD464A1706475188A1F /* Pods */,
+				B2E19C8736B8B9502F0942D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = "chating-seminar-ios";
 			sourceTree = "<group>";
 		};
+		621B8DD464A1706475188A1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				23340D40B8B02497A32E924E /* Pods-chating-seminar-ios.debug.xcconfig */,
+				84B1FF7452DAC794CB895060 /* Pods-chating-seminar-ios.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B2E19C8736B8B9502F0942D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DAEB7593F869DDE7DDBBED74 /* Pods_chating_seminar_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0CE6468D207BD3B5001E41D2 /* Build configuration list for PBXNativeTarget "chating-seminar-ios" */;
 			buildPhases = (
+				DC4CDD347CD15E37C4A9CF51 /* [CP] Check Pods Manifest.lock */,
 				0CE64677207BD3B4001E41D2 /* Sources */,
 				0CE64678207BD3B4001E41D2 /* Frameworks */,
 				0CE64679207BD3B4001E41D2 /* Resources */,
+				089D0CB16A28FE72AEB63499 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +156,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		089D0CB16A28FE72AEB63499 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-chating-seminar-ios/Pods-chating-seminar-ios-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chating-seminar-ios/Pods-chating-seminar-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC4CDD347CD15E37C4A9CF51 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chating-seminar-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0CE64677207BD3B4001E41D2 /* Sources */ = {
@@ -272,6 +345,7 @@
 		};
 		0CE6468E207BD3B5001E41D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 23340D40B8B02497A32E924E /* Pods-chating-seminar-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -286,6 +360,7 @@
 		};
 		0CE6468F207BD3B5001E41D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84B1FF7452DAC794CB895060 /* Pods-chating-seminar-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
