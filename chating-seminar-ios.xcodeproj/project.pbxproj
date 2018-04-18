@@ -109,6 +109,7 @@
 				0CE64678207BD3B4001E41D2 /* Frameworks */,
 				0CE64679207BD3B4001E41D2 /* Resources */,
 				089D0CB16A28FE72AEB63499 /* [CP] Embed Pods Frameworks */,
+				0C30A1062087693F00E0C0F7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -191,6 +192,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chating-seminar-ios/Pods-chating-seminar-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		0C30A1062087693F00E0C0F7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		DC4CDD347CD15E37C4A9CF51 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
