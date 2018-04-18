@@ -9,6 +9,8 @@ target 'chating-seminar-ios' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Database'
 	pod 'Firebase/Storage'
-	pod 'Firebase/Crash'
+	# pod 'Firebase/Crash'
+	pod 'Fabric', '~> 1.7.6'
+	pod 'Crashlytics', '~> 3.10.1'
 
 end

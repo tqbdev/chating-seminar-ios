@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 class MessageUserViewController: UIViewController {
 
@@ -17,6 +18,10 @@ class MessageUserViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(self.logOutAction))
+    }
+    
+    @IBAction func crashButtonTapped(_ sender: AnyObject) {
+        Crashlytics.sharedInstance().crash()
     }
     
     @objc func logOutAction() {
