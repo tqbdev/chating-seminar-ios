@@ -20,6 +20,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func testBtnAction(_ sender: Any?){
+
+        
+        Auth.auth().signIn(withEmail: "tranminhannguyen@gmail.com", password: "1234567") {
+            (user, error) in
+            if let error = error {
+                self.showNoticeMessage(title: "Login error", message: error.localizedDescription)
+                return
+            }
+            let  friendlistUserVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendListViewController") as! FriendListViewController
+            self.navigationController?.pushViewController(friendlistUserVC, animated: true)
+            
+        }
+    }
+    
     @IBAction func loginBtnAction(_ sender: UIButton) {
         if let email = self.userEmail.text, let password = self.userPassword.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -44,11 +59,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     else {
                         // TODO: switch screen
                         print("Login successfully")
-                        let messageUserVC = self.storyboard?.instantiateViewController(withIdentifier: "MessageUserViewController") as! MessageUserViewController
+                        let friendlistUserVC = self.storyboard?.instantiateViewController(withIdentifier: "FriendListViewController") as! FriendListViewController
                         
                         //messageUserVC.delegate = self
                         //messageUserVC.oldStudent = oldStudent as? Student
-                        self.navigationController?.pushViewController(messageUserVC, animated: true)
+                        self.navigationController?.pushViewController(friendlistUserVC, animated: true)
                     }
                 }
             }
@@ -143,14 +158,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

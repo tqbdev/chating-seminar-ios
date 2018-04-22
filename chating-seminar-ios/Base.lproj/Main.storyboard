@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Vc-Ru-0Kw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Vc-Ru-0Kw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -62,6 +62,17 @@
                                     <action selector="signupBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M1y-Ea-Pfb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDU-ao-UG6">
+                                <rect key="frame" x="80" y="559" width="215" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Test">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="testBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7Z-Zz-lN8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.28991369852874932" green="0.78934010152284262" blue="0.45138412583187709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -91,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22" y="125"/>
+            <point key="canvasLocation" x="21.600000000000001" y="124.58770614692655"/>
         </scene>
         <!--Message User View Controller-->
         <scene sceneID="yyk-oE-52j">
@@ -122,6 +133,92 @@
             </objects>
             <point key="canvasLocation" x="856.79999999999995" y="124.58770614692655"/>
         </scene>
+        <!--Friend List View Controller-->
+        <scene sceneID="fMU-cz-ObX">
+            <objects>
+                <viewController storyboardIdentifier="FriendListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jGi-qr-G6O" customClass="FriendListViewController" customModule="chating_seminar_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qwv-LC-jYh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iJO-Ay-fp0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nZ-J5-hOz">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add friend's email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kqV-Pc-0J6">
+                                                <rect key="frame" x="30" y="10" width="315" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.28981348872184753" green="0.78938746452331543" blue="0.45032656192779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="kqV-Pc-0J6" firstAttribute="leading" secondItem="3nZ-J5-hOz" secondAttribute="leading" constant="30" id="3h5-wN-4w5"/>
+                                            <constraint firstAttribute="trailing" secondItem="kqV-Pc-0J6" secondAttribute="trailing" constant="30" id="DCs-tq-67S"/>
+                                            <constraint firstItem="kqV-Pc-0J6" firstAttribute="centerY" secondItem="3nZ-J5-hOz" secondAttribute="centerY" id="M2F-7p-5dN"/>
+                                            <constraint firstItem="kqV-Pc-0J6" firstAttribute="centerX" secondItem="3nZ-J5-hOz" secondAttribute="centerX" id="ioR-7b-SkO"/>
+                                            <constraint firstAttribute="height" constant="50" id="ohM-GL-wNC"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sSI-Vd-w5Y">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="597"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmailViewCell" id="5bQ-ZQ-dY4" customClass="TableViewCell" customModule="chating_seminar_ios" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5bQ-ZQ-dY4" id="T7f-O0-chg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jCh-5K-lQA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="jCh-5K-lQA" firstAttribute="top" secondItem="T7f-O0-chg" secondAttribute="top" id="2uh-1c-RwA"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jCh-5K-lQA" secondAttribute="bottom" id="Kfl-Ne-2cH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="jCh-5K-lQA" secondAttribute="trailing" id="QeK-ws-Snm"/>
+                                                        <constraint firstItem="jCh-5K-lQA" firstAttribute="leading" secondItem="T7f-O0-chg" secondAttribute="leading" id="gYu-8Y-6bH"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="EmailText" destination="jCh-5K-lQA" id="Zfp-bS-Og5"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="jGi-qr-G6O" id="Wvi-py-u2O"/>
+                                            <outlet property="delegate" destination="jGi-qr-G6O" id="1er-SX-DWe"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="iJO-Ay-fp0" firstAttribute="leading" secondItem="9R5-gj-saF" secondAttribute="leading" id="4Ve-47-rG0"/>
+                            <constraint firstItem="9R5-gj-saF" firstAttribute="bottom" secondItem="iJO-Ay-fp0" secondAttribute="bottom" id="Gai-u4-KlU"/>
+                            <constraint firstItem="iJO-Ay-fp0" firstAttribute="top" secondItem="9R5-gj-saF" secondAttribute="top" id="hqI-0e-rwl"/>
+                            <constraint firstItem="9R5-gj-saF" firstAttribute="trailing" secondItem="iJO-Ay-fp0" secondAttribute="trailing" id="qee-ML-ool"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9R5-gj-saF"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTableView" destination="sSI-Vd-w5Y" id="brj-CL-bfx"/>
+                        <outlet property="emailTextField" destination="kqV-Pc-0J6" id="hzS-cf-Aqs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oT3-8Q-1rr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="856.79999999999995" y="882.90854572713647"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="LuB-1p-wAZ">
             <objects>
@@ -129,6 +226,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2kR-MH-uBe">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.28981348872184753" green="0.78938746452331543" blue="0.45032656192779541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="UKV-Xq-Ez7"/>
