@@ -65,29 +65,26 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         // [END downloadimage]
     }
     
-    func loadAvatar(email: String) -> UIImage? {
+    func loadAvatar(email: String, imageView: UIImageView) {
         let storageRef = storage.reference()
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
         let filePath = "file:\(documentsDirectory)/" + email + ".jpg"
-        guard let fileURL = URL(string: filePath) else { return nil }
+        guard let fileURL = URL(string: filePath) else { return }
         let storagePath = "profileAvatars/" + email + ".jpg"
         
         // [START downloadimage]
-        var image: UIImage? = nil
         storageRef.child(storagePath).write(toFile: fileURL, completion: { (url, error) in
             if let error = error {
                 print("Error downloading:\(error)")
-                print ("Download Failed")
+                print ("Download Failed" + email)
                 return
             } else if let imagePath = url?.path {
-                print ("Download Succeeded!")
-                image = UIImage(contentsOfFile: imagePath)
+                print ("Download Succeeded!" + email)
+                imageView.image = UIImage(contentsOfFile: imagePath)
             }
         })
         // [END downloadimage]
-        
-        return image
     }
     
     @objc func handleSelectUserAvatar() {
@@ -306,14 +303,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         let s = emailList[indexPath.row]
         cell.EmailText.text = s.email
         
-        let imageAvatarDownload = loadAvatar(email: s.email)
-        
-        guard let imageAvatar = imageAvatarDownload else {
-            return cell
-        }
-        cell.FriendAvatar.image = imageAvatar
-        cell.FriendAvatar.layer.cornerRadius = cell.FriendAvatar.layer.bounds.width/2
-        cell.FriendAvatar.layer.masksToBounds = true
+        loadAvatar(email: s.email, imageView: cell.FriendAvatar)
         return cell
     }
 }
