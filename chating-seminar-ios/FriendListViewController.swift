@@ -8,14 +8,17 @@
 
 import UIKit
 import Firebase
+import Photos
 var ref: DatabaseReference?
-
 
 var currentUser:User?
 
-class FriendListViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate {
+class FriendListViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    lazy var storage = Storage.storage()
+    
     var senderDisplayName: String?
     @IBOutlet weak var emailTextField: UITextField?
+    @IBOutlet weak var UserAvatar: UIImageView!
     @IBOutlet weak var emailTableView: UITableView?
     var emailList: [(id:String,email:String)] = [(String,String)]()
     var user:User?
@@ -28,18 +31,123 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         self.title = "Friends List"
         
         ref = Database.database().reference()
+        
+        UserAvatar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.handleSelectUserAvatar)))
+        UserAvatar.isUserInteractionEnabled = true
+        
         addOnlineUser()
-//        loadFriendList()
-//        loadMessage()
-        //print(emailTableView.selec)
+        loadUserAvatar()
     }
     
     
+    // MARK: Firebase storage avatar
+    func loadUserAvatar() {
+        let storageRef = storage.reference()
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        let filePath = "file:\(documentsDirectory)/" + (Auth.auth().currentUser?.email!)! + ".jpg"
+        guard let fileURL = URL(string: filePath) else { return }
+        let storagePath = "profileAvatars/" + (Auth.auth().currentUser?.email!)! + ".jpg"
+        
+        // [START downloadimage]
+        storageRef.child(storagePath).write(toFile: fileURL, completion: { (url, error) in
+            if let error = error {
+                print("Error downloading:\(error)")
+                print ("Download Failed")
+                return
+            } else if let imagePath = url?.path {
+                print ("Download Succeeded!")
+                self.UserAvatar.image = UIImage(contentsOfFile: imagePath)
+                self.UserAvatar.layer.cornerRadius = self.UserAvatar.layer.bounds.width/2
+                self.UserAvatar.layer.masksToBounds = true
+            }
+        })
+        // [END downloadimage]
+    }
+    
+    func loadAvatar(email: String) -> UIImage? {
+        let storageRef = storage.reference()
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        let filePath = "file:\(documentsDirectory)/" + email + ".jpg"
+        guard let fileURL = URL(string: filePath) else { return nil }
+        let storagePath = "profileAvatars/" + email + ".jpg"
+        
+        // [START downloadimage]
+        var image: UIImage? = nil
+        storageRef.child(storagePath).write(toFile: fileURL, completion: { (url, error) in
+            if let error = error {
+                print("Error downloading:\(error)")
+                print ("Download Failed")
+                return
+            } else if let imagePath = url?.path {
+                print ("Download Succeeded!")
+                image = UIImage(contentsOfFile: imagePath)
+            }
+        })
+        // [END downloadimage]
+        
+        return image
+    }
+    
+    @objc func handleSelectUserAvatar() {
+        let alert = UIAlertController(title: "Do you wanna change avatar?", message: "", preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "OK", style: .destructive) {
+            (action) in
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.dismiss(animated: true, completion: nil)
+        
+        var selectedImageFromPicker: UIImage?
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] {
+            selectedImageFromPicker = editedImage as? UIImage
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] {
+            selectedImageFromPicker = originalImage as? UIImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            UserAvatar.image = selectedImage
+            UserAvatar.layer.cornerRadius = UserAvatar.layer.bounds.width/2
+            UserAvatar.layer.masksToBounds = true
+        
+            // Upload image avatar to storage firebase
+            guard let imageData = UIImageJPEGRepresentation(selectedImage, 0.8) else { return }
+            let imagePath = "profileAvatars/" + (Auth.auth().currentUser?.email!)! + ".jpg"
+            let metaData = StorageMetadata()
+            metaData.contentType = "image/jpeg"
+            let storageRef = self.storage.reference(withPath: imagePath)
+            storageRef.putData(imageData, metadata: metaData) { (metadata, error) in
+                if let error = error {
+                    print ("Error uploading: \(error)")
+                    return
+                }
+                print ("Uploaded avatar image")
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    //
     
     override func viewWillAppear(_ animated: Bool) {
         emailList = []
         loadFriendList()
-        //loadMessage()
         emailTableView?.reloadData()
     }
 
@@ -56,23 +164,19 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
                     print(snapshot)
                 })
         }
-//        let message = ref?.child("Message")
-//        DispatchQueue.global().async {
-//        }
-
     }
     
     func loadFriendList() {
         let list = ref?.child("ListUser").child((user?.uid)!).child("FriendList")
         list?.observe(.childAdded, with: {
             (snapshot) in
-            let postDict =  snapshot.value as? [String:Any]	
+            let postDict =  snapshot.value as? [String:Any]
             if( postDict != nil ){
-                let emailFriend:String = postDict!["email"] as! String
-                //if( emailFriend != nil){
-                    self.emailList.append((snapshot.key,emailFriend))
+                let emailFriend:String? = postDict!["email"] as? String
+                if( emailFriend != nil) {
+                    self.emailList.append((snapshot.key,emailFriend!))
                     self.emailTableView?.reloadData()
-                //}
+                }
             }
         })
     }
@@ -88,7 +192,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @objc func menuAction() {
         let actionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
-        actionMenu.addAction(UIAlertAction(title: "Log out", style: .default, handler:
+        actionMenu.addAction(UIAlertAction(title: "Log out", style: .destructive, handler:
             {
                 (alert: UIAlertAction!) -> Void in
                         do {
@@ -110,11 +214,10 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         if(emailTxt != nil){
             if(checkArrayFriend(email: emailTxt!)) {
                 self.emailTextField?.text = ""
-                let arlet = UIAlertController(title: nil, message: "Email added", preferredStyle: .alert)
-                arlet.addAction(UIAlertAction(title: "Cancle", style: .cancel, handler: nil))
+                let arlet = UIAlertController(title: nil, message: "Email already added", preferredStyle: .alert)
+                arlet.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(arlet, animated: true, completion: {
                     self.emailTextField?.text = ""
-                    
                 })
                 return
             }
@@ -126,8 +229,8 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
                     let user = Auth.auth().currentUser
                     if(emailTxt?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) != ""){
                     if(emailTxt == user?.email) {
-                        let arlet = UIAlertController(title: nil, message: "Cann't add yourself", preferredStyle: .alert)
-                        arlet.addAction(UIAlertAction(title: "Cancle", style: .cancel, handler: nil))
+                        let arlet = UIAlertController(title: nil, message: "Can't add yourself", preferredStyle: .alert)
+                        arlet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                         self.present(arlet, animated: true, completion: {
                             self.emailTextField?.text = ""
                             
@@ -179,6 +282,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
 
     }
     
+    // MARK: Table View list Friend
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return emailList.count
     }
@@ -197,12 +301,19 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         self.performSegue(withIdentifier: "GoToChat", sender: emailList[indexPath.row])
     }
     
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmailViewCell") as! TableViewCell
         let s = emailList[indexPath.row]
         cell.EmailText.text = s.email
+        
+        let imageAvatarDownload = loadAvatar(email: s.email)
+        
+        guard let imageAvatar = imageAvatarDownload else {
+            return cell
+        }
+        cell.FriendAvatar.image = imageAvatar
+        cell.FriendAvatar.layer.cornerRadius = cell.FriendAvatar.layer.bounds.width/2
+        cell.FriendAvatar.layer.masksToBounds = true
         return cell
     }
 }

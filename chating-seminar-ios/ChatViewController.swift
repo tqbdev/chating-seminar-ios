@@ -81,7 +81,7 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
 
         let newMess = ref?.child("ListUser").child((self.infoPass?.id)!).child("FriendList").child(self.userID!).child("new")
         newMess?.observeSingleEvent(of: .value, with: {(snapshot) in
-            var value = snapshot.value as! Int
+            _ = snapshot.value as! Int
             newMess?.setValue(0)
         })
     }
@@ -109,8 +109,8 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
         let childMess1 = idMess1?.child((childMess?.key)!)
         let text = self.inputText.text
         let time = Int(NSDate().timeIntervalSince1970)
-        let value = ["type":"Send","text":text,"timestamp":time] as! [String : Any]
-        let value1 = ["type":"Get","text":text,"timestamp":time] as! [String : Any]
+        let value = ["type":"Send","text":text!,"timestamp":time] as [String : Any]
+        let value1 = ["type":"Get","text":text!,"timestamp":time] as [String : Any]
         childMess?.setValue(value)
         childMess1?.setValue(value1)
         
