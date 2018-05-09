@@ -66,13 +66,13 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         let list = ref?.child("ListUser").child((user?.uid)!).child("FriendList")
         list?.observe(.childAdded, with: {
             (snapshot) in
-            let postDict =  snapshot.value as? [String:Any]
+            let postDict =  snapshot.value as? [String:Any]	
             if( postDict != nil ){
                 let emailFriend:String = postDict!["email"] as! String
-                if( emailFriend != nil){
+                //if( emailFriend != nil){
                     self.emailList.append((snapshot.key,emailFriend))
                     self.emailTableView?.reloadData()
-                }
+                //}
             }
         })
     }
@@ -134,7 +134,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
                         })
                     }
                         if(emailTxt == email ){
-                        print(emailTxt)
+                            print(emailTxt!)
                         //self.emailList.append((snapshot.key,email))
                         self.emailTableView?.reloadData()
                         self.emailTextField?.text = ""
