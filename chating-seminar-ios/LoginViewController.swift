@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -18,6 +19,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: okHandler))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func testCrashBtnAction(_ sender: Any) {
+        Crashlytics.sharedInstance().crash()
     }
     
     @IBAction func testBtnAction(_ sender: Any?){

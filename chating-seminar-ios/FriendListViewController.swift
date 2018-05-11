@@ -121,6 +121,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
             UserAvatar.layer.masksToBounds = true
         
             // Upload image avatar to storage firebase
+            // [START uploadimage]
             guard let imageData = UIImageJPEGRepresentation(selectedImage, 0.8) else { return }
             let imagePath = "profileAvatars/" + (Auth.auth().currentUser?.email!)! + ".jpg"
             let metaData = StorageMetadata()
@@ -133,6 +134,7 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
                 }
                 print ("Uploaded avatar image")
             }
+            // [START uploadimage]
         }
     }
     
