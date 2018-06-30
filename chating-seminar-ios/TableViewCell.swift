@@ -15,6 +15,7 @@ class TableViewCell: UITableViewCell {
         print("Chat")
     }
     @IBOutlet weak var EmailText:UITextView!
+    @IBOutlet weak var FriendAvatar: UIImageView!
     var ID:String?
     override func awakeFromNib() {
         super.awakeFromNib()
