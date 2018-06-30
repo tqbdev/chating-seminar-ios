@@ -20,7 +20,6 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var emailTextField: UITextField?
     @IBOutlet weak var UserAvatar: UIImageView!
     @IBOutlet weak var emailTableView: UITableView?
-    
     var emailList: [(id:String,email:String)] = [(String,String)]()
     var user:User?
     override func viewDidLoad() {
@@ -171,7 +170,6 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
         list?.observe(.childAdded, with: {
             (snapshot) in
             let postDict =  snapshot.value as? [String:Any]
-            print(postDict)
             if( postDict != nil ){
                 let emailFriend:String? = postDict!["email"] as? String
                 if( emailFriend != nil) {
@@ -224,8 +222,6 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
             }
             ref?.child("ListUser").observe(.childAdded, with:{
                 (snapshot) in
-                print(snapshot)
-                
                 let postDict = snapshot.value as? [String:Any]
                 if(postDict != nil){
                     let email:String = postDict!["email"] as! String
@@ -239,8 +235,8 @@ class FriendListViewController: UIViewController,UITableViewDataSource,UITableVi
                             
                         })
                     }
-                    if(emailTxt == email ){
-                        print(emailTxt!)
+                        if(emailTxt == email ){
+                            print(emailTxt!)
                         //self.emailList.append((snapshot.key,email))
                         self.emailTableView?.reloadData()
                         self.emailTextField?.text = ""

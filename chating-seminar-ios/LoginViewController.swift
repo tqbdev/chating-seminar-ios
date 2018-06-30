@@ -148,9 +148,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTapGesture()
+
         // Do any additional setup after loading the view.
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -163,12 +162,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder();
         return true
     }
-    func addTapGesture(){
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapHandler))
-        view.addGestureRecognizer(tap)
-    }
-    @objc private func tapHandler(){
-        view.endEditing(true);
-    }
+
 
 }
